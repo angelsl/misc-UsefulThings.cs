@@ -82,6 +82,7 @@ namespace Utilitas {
 
     public unsafe interface IBytePointerObject : IDisposable {
         byte* Pointer { get; }
+        long Length { get; }
     }
 
     internal unsafe class ByteArrayPointer : IBytePointerObject {
@@ -115,6 +116,8 @@ namespace Utilitas {
                 return _start;
             }
         }
+
+        public long Length => _array.LongLength;
     }
 
     internal unsafe class MemoryMappedFile : IBytePointerObject {
@@ -130,6 +133,8 @@ namespace Utilitas {
         }
 
         public byte* Pointer => _ptr;
+
+        public long Length => _mmva.Capacity;
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
