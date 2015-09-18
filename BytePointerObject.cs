@@ -156,19 +156,22 @@ namespace Utilitas {
         protected readonly byte* _start;
         protected readonly byte* _end;
         protected byte* _cur;
+        private readonly bool _canWrite;
 
         public PointerStream(byte* start, long length, bool canWrite = false) {
             _start = start;
             _cur = start;
             _end = start + length;
-            CanWrite = false;
+            _canWrite = false;
         }
 
         public override bool CanRead => true;
 
         public override bool CanSeek => true;
 
-        public override bool CanWrite { get; }
+        public override bool CanWrite {
+            get { return _canWrite; }
+        }
 
         public override long Length => _end - _start;
 
