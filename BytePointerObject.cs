@@ -153,9 +153,9 @@ namespace Utilitas {
     }
 
     internal unsafe class PointerStream : Stream, IBytePointerObject {
-        private readonly byte* _start;
-        private readonly byte* _end;
-        private byte* _cur;
+        protected readonly byte* _start;
+        protected readonly byte* _end;
+        protected byte* _cur;
 
         public PointerStream(byte* start, long length, bool canWrite = false) {
             _start = start;
@@ -239,7 +239,7 @@ namespace Utilitas {
                 throw new ArgumentException("The sum of offset and count is greater than the buffer length.", nameof(count));
             ByteMarshal.CopyTo(buffer, offset, _cur, count);
            _cur += count;
-       }
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write(bool value) {
