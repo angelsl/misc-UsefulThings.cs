@@ -37,6 +37,14 @@ namespace UsefulThings {
     internal static unsafe class ByteMarshal {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(byte* from, byte[] to, long off, long count) {
+            fixed (byte* pTo = to)
+            {
+                CopyTo(from, pTo + off, (ulong) count);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void CopyTo(byte* from, byte[] to, ulong off, ulong count) {
             fixed (byte* pTo = to) {
                 CopyTo(from, pTo + off, count);
             }
@@ -44,6 +52,14 @@ namespace UsefulThings {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(byte[] from, long off, byte* to, long count) {
+            fixed (byte* pFrom = from)
+            {
+                CopyTo(pFrom + off, to, (ulong) count);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void CopyTo(byte[] from, ulong off, byte* to, ulong count) {
             fixed (byte* pFrom = from)
             {
                 CopyTo(pFrom + off, to, count);
@@ -54,11 +70,24 @@ namespace UsefulThings {
         public static void CopyTo(byte[] from, long fromOff, byte[] to, long toOff, long count) {
             fixed (byte* pFrom = from, pTo = to)
             {
+                CopyTo(pFrom + fromOff, pTo + toOff, (ulong) count);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void CopyTo(byte[] from, ulong fromOff, byte[] to, ulong toOff, ulong count) {
+            fixed (byte* pFrom = from, pTo = to)
+            {
                 CopyTo(pFrom + fromOff, pTo + toOff, count);
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(byte* from, byte* to, long bytes) {
+            CopyTo(from, to, (ulong)bytes);
+        }
+
+        public static void CopyTo(byte* from, byte* to, ulong bytes) {
             while (bytes >= sizeof(long)) {
                 *((long*) to) = *((long*) from);
                 bytes -= sizeof(long);
