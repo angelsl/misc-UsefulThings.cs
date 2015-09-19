@@ -1,31 +1,31 @@
-// Utilitas is copyright angelsl, 2011 to 2015 inclusive.
+// UsefulThings is copyright angelsl, 2011 to 2015 inclusive.
 // 
-// This file (PointerStream.cs) is part of Utilitas.
+// This file (PointerStream.cs) is part of UsefulThings.
 // 
-// Utilitas is free software: you can redistribute it and/or modify
+// UsefulThings is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Utilitas is distributed in the hope that it will be useful,
+// UsefulThings is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with Utilitas. If not, see <http://www.gnu.org/licenses/>.
+// along with UsefulThings. If not, see <http://www.gnu.org/licenses/>.
 // 
-// Linking Utilitas statically or dynamically with other modules
-// is making a combined work based on Utilitas. Thus, the terms and
+// Linking UsefulThings statically or dynamically with other modules
+// is making a combined work based on UsefulThings. Thus, the terms and
 // conditions of the GNU General Public License cover the whole combination.
 // 
-// As a special exception, the copyright holders of Utilitas give you
-// permission to link Utilitas with independent modules to produce an
+// As a special exception, the copyright holders of UsefulThings give you
+// permission to link UsefulThings with independent modules to produce an
 // executable, regardless of the license terms of these independent modules,
 // and to copy and distribute the resulting executable under terms of your
 // choice, provided that you also meet, for each linked independent module,
 // the terms and conditions of the license of that module. An independent
-// module is a module which is not derived from or based on Utilitas.
+// module is a module which is not derived from or based on UsefulThings.
 
 using System.Runtime.CompilerServices;
 
