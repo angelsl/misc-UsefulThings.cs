@@ -28,6 +28,7 @@
 // module is a module which is not derived from or based on UsefulThings.
 
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -155,8 +156,9 @@ namespace UsefulThings {
         private byte* _ptr;
 
         internal MemoryMappedFile(string path) {
-            _mmf = SIOMMF.MemoryMappedFile.CreateFromFile(path);
-            _mmva = _mmf.CreateViewAccessor();
+            FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            _mmf = SIOMMF.MemoryMappedFile.CreateFromFile(fs, null, 0, SIOMMF.MemoryMappedFileAccess.Read, null, HandleInheritability.None, false);
+            _mmva = _mmf.CreateViewAccessor(0, 0, SIOMMF.MemoryMappedFileAccess.Read);
             _mmva.SafeMemoryMappedViewHandle.AcquirePointer(ref _ptr);
         }
 
@@ -172,6 +174,7 @@ namespace UsefulThings {
             if (_disposed)
                 throw new ObjectDisposedException("Memory mapped file");
             _ptr = null;
+            _mmva.SafeMemoryMappedViewHandle.ReleasePointer();
             _mmva.Dispose();
             _mmva = null;
             _mmf.Dispose();
