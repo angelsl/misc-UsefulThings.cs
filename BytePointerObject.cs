@@ -40,7 +40,7 @@ namespace UsefulThings {
         public static void CopyTo(byte* from, byte[] to, long off, long count) {
             fixed (byte* pTo = to)
             {
-                CopyTo(from, pTo + off, (ulong) count);
+                CopyTo(from, pTo + off, count);
             }
         }
 
@@ -55,7 +55,7 @@ namespace UsefulThings {
         public static void CopyTo(byte[] from, long off, byte* to, long count) {
             fixed (byte* pFrom = from)
             {
-                CopyTo(pFrom + off, to, (ulong) count);
+                CopyTo(pFrom + off, to, count);
             }
         }
 
@@ -71,7 +71,7 @@ namespace UsefulThings {
         public static void CopyTo(byte[] from, long fromOff, byte[] to, long toOff, long count) {
             fixed (byte* pFrom = from, pTo = to)
             {
-                CopyTo(pFrom + fromOff, pTo + toOff, (ulong) count);
+                CopyTo(pFrom + fromOff, pTo + toOff, count);
             }
         }
 
@@ -85,27 +85,12 @@ namespace UsefulThings {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(byte* from, byte* to, long bytes) {
-            CopyTo(from, to, (ulong)bytes);
+            Buffer.MemoryCopy(from, to, bytes, bytes);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyTo(byte* from, byte* to, ulong bytes) {
-            while (bytes >= sizeof(long)) {
-                *((long*) to) = *((long*) from);
-                bytes -= sizeof(long);
-                to += sizeof(long);
-                from += sizeof(long);
-            }
-
-            while (bytes >= sizeof(int)) {
-                *((int*) to) = *((int*) from);
-                bytes -= sizeof(int);
-                to += sizeof(int);
-                from += sizeof(int);
-            }
-
-            while (bytes-- > 0) {
-                *(to++) = *(from++);
-            }
+            Buffer.MemoryCopy(from, to, bytes, bytes);
         }
     }
 
